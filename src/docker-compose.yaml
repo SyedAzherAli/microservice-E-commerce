@@ -2,73 +2,73 @@ version: '3'
 services:
   app1:
     build:
-      context: .
+      context: ./adservice
       dockerfile: adservice/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/adservice:lastest
     
   app2:
     build:
-      context: .
+      context: ./cartservice
       dockerfile: cartservice/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/cartservice:lastest
     
   app3:
     build:
-      context: .
+      context: ./checkoutservice
       dockerfile: checkoutservice/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/checkoutservice:lastest
     
   app4:
     build:
-      context: .
+      context: ./currencyservice
       dockerfile: currencyservice/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/currencyservice:lastest
     
   app5:
     build:
-      context: .
+      context: ./emailservice
       dockerfile: emailservice/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/emailservice:lastest
   
   app6:
     build:
-      context: .
+      context: ./frontend
       dockerfile: frontend/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/frontend:lastest
   
   app7: 
     build:
-      context: .
+      context: ./loadgenerator
       dockerfile: loadgenerator/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/loadgenerator:lastest
   
   app8:  
     build:
-      context: .
+      context: ./paymentservice
       dockerfile: paymentservice/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/paymentservice:lastest
 
   app9:  
     build:
-      context: .
+      context: ./productcatalogservice
       dockerfile: productcatalogservice/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/productcatalogservice:lastest
   
   app10:
     build:
-      context: .
+      context: ./recommendationservice
       dockerfile: recommendationservice/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/recommendationservice:lastest
   
   app11:    
     build:
-      context: .
+      context: ./shippingservice
       dockerfile: shippingservice/Dockerfile
     image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/shippingservice:lastest
   
   # app12:
   #   build:
-  #     context: .
+  #     context: ./shoppingassistantservice
   #     dockerfile: shoppingassistantservice/Dockerfile
   #   image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/shoppingassistantservice:latest
 
