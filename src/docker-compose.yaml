@@ -1,0 +1,76 @@
+version: '3'
+services:
+  app1:
+    build:
+      context: .
+      dockerfile: adservice/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/adservice:lastest
+    
+  app2:
+    build:
+      context: .
+      dockerfile: cartservice/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/cartservice:lastest
+    
+  app3:
+    build:
+      context: .
+      dockerfile: checkoutservice/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/checkoutservice:lastest
+    
+  app4:
+    build:
+      context: .
+      dockerfile: currencyservice/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/currencyservice:lastest
+    
+  app5:
+    build:
+      context: .
+      dockerfile: emailservice/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/emailservice:lastest
+  
+  app6:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/frontend:lastest
+  
+  app7: 
+    build:
+      context: .
+      dockerfile: loadgenerator/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/loadgenerator:lastest
+  
+  app8:  
+    build:
+      context: .
+      dockerfile: paymentservice/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/paymentservice:lastest
+
+  app9:  
+    build:
+      context: .
+      dockerfile: productcatalogservice/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/productcatalogservice:lastest
+  
+  app10:
+    build:
+      context: .
+      dockerfile: recommendationservice/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/recommendationservice:lastest
+  
+  app11:    
+    build:
+      context: .
+      dockerfile: shippingservice/Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/shippingservice:lastest
+  
+  # app12:
+  #   build:
+  #     context: .
+  #     dockerfile: shoppingassistantservice/Dockerfile
+  #   image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/shoppingassistantservice:latest
+
+# To build the images
+# docker-compose build

@@ -1,0 +1,39 @@
+# Create EKS Cluster 
+Download Terraform code: ""
+$ cd terraform 
+Change variables (enter your key name)
+$ terraform plan 
+$ terraform apply 
+
+Now the resources are created such as, EKS cluste with 2 nodes, Jump Server, Jenkins Server, ECR Image Repos 
+
+# Install ArgoCD 
+
+# Setup AWS Loadbalancer Controller 
+
+
+# k8s ecr secret
+aws configure 
+
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 654654355718.dkr.ecr.ap-south-1.amazonaws.com
+
+kubectl create secret generic ecr-registry-key \
+--from-file=.dockerconfigjson=~/.docker/config.json \
+--type=kubernetes.io/dockerconfigjson || echo "Secret already exists, skipping creation."
+
+
+apiVersion: v1
+kind: Secret 
+metadata:
+   name: ecr-registry-key 
+data:
+   .dockerconfigjson: <enter base64 encoded config file>
+type: kubernetes.io/dockerconfigjson
+
+# Create Jenkins Credentials kind "secret text"
+Secret: Enter the AWS Access Key ID and AWs Secret Access key in the format 
+AWS_ACCESS_KEY_ID:AWS_SECRET_ACCESS_KEY
+ID: aws-ecr-credentials
+
+
+
