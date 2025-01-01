@@ -2,75 +2,76 @@ version: '3'
 services:
   app1:
     build:
-      context: .
-      dockerfile: adservice/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/adservice:lastest
+      context: ./adservice
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/adservice:latest
     
   app2:
     build:
-      context: .
-      dockerfile: cartservice/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/cartservice:lastest
+      context: ./cartservice
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/cartservice:latest
     
   app3:
     build:
-      context: .
-      dockerfile: checkoutservice/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/checkoutservice:lastest
+      context: ./checkoutservice
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/checkoutservice:latest
     
   app4:
     build:
-      context: .
-      dockerfile: currencyservice/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/currencyservice:lastest
+      context: ./currencyservice
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/currencyservice:latest
     
   app5:
     build:
-      context: .
-      dockerfile: emailservice/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/emailservice:lastest
+      context: ./emailservice
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/emailservice:latest
   
   app6:
     build:
-      context: .
-      dockerfile: frontend/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/frontend:lastest
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest
   
   app7: 
     build:
-      context: .
-      dockerfile: loadgenerator/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/loadgenerator:lastest
+      context: ./loadgenerator
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/loadgenerator:latest
   
   app8:  
     build:
-      context: .
-      dockerfile: paymentservice/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/paymentservice:lastest
+      context: ./paymentservice
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/paymentservice:latest
 
   app9:  
     build:
-      context: .
-      dockerfile: productcatalogservice/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/productcatalogservice:lastest
+      context: ./productcatalogservice
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/productcatalogservice:latest
   
   app10:
     build:
-      context: .
-      dockerfile: recommendationservice/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/recommendationservice:lastest
+      context: ./recommendationservice
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/recommendationservice:latest
   
   app11:    
     build:
-      context: .
-      dockerfile: shippingservice/Dockerfile
-    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/shippingservice:lastest
+      context: ./shippingservice
+      dockerfile: Dockerfile
+    image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/shippingservice:latest
   
+  # Uncomment and modify the following block if needed
   # app12:
   #   build:
-  #     context: .
-  #     dockerfile: shoppingassistantservice/Dockerfile
+  #     context: ./shoppingassistantservice
+  #     dockerfile: Dockerfile
   #   image: 654654355718.dkr.ecr.ap-south-1.amazonaws.com/shoppingassistantservice:latest
 
 # To build the images
-# docker-compose build
+# Run: docker-compose build
