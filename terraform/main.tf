@@ -1,14 +1,14 @@
 provider "aws" {
   region = "ap-south-1"
 }
-# module "vpc" {
-#   source = "./modules/vpc"
-# }
-# module "security_group" {
-#   source = "./modules/security_group"
+module "vpc" {
+  source = "./modules/vpc"
+}
+module "security_group" {
+  source = "./modules/security_group"
 
-#   sg_vpc_id = module.vpc.vpc_id
-# }
+  sg_vpc_id = module.vpc.vpc_id
+}
 module "ecr_repos" {
   source            = "./modules/ecr_repos"
   repository_names = [
@@ -26,23 +26,23 @@ module "ecr_repos" {
     "shoppingassistantservice"
   ]
 }
-# module "jenkins_server" {
-#   source = "./modules/jenkins_server"
+module "jenkins_server" {
+  source = "./modules/jenkins_server"
 
-#   key_name  = var.key_name
-#   subnet_id = module.vpc.subnet01_id
-#   sg_vpc_id = module.vpc.vpc_id
-#   instance_type = "t2.large"
-#   user_data = "jenkins-server.sh"
-#   volume_size = 25
-# }
+  key_name  = var.key_name
+  subnet_id = module.vpc.pub_subnet01_id
+  sg_vpc_id = module.vpc.vpc_id
+  instance_type = "t2.large"
+  user_data = "./jenkins-script.sh"
+  volume_size = 25
+}
 
 # module "jump_server" {
 #   source = "./modules/ec2"
 #   ami = "ami-053b12d3152c0cc71"
 #   instance_type = "t2.medium"
 #   key_name  = var.key_name
-#   subnet_id = module.vpc.subnet01_id
+#   subnet_id = module.vpc.pub_subnet01_id
 #   security_group_id = module.security_group.security_group_id
 #   user_data = "script.sh"
 #   volume_size = 16

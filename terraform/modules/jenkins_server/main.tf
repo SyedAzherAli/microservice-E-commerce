@@ -44,7 +44,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_port8080" {
   ip_protocol       = "tcp"
   to_port           = 8080
 }
-resource "aws_vpc_security_group_ingress_rule" "allow_port8080" {
+resource "aws_vpc_security_group_ingress_rule" "allow_port9000" {
   security_group_id = aws_security_group.Jenkins_SG.id
   cidr_ipv4         = "0.0.0.0/0"
   from_port         = 9000 // for sonarqube server 

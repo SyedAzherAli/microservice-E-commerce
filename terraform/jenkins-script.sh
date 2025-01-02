@@ -34,6 +34,16 @@ sudo usermod -aG docker ubuntu
 sudo systemctl restart docker
 sudo chmod 777 /var/run/docker.sock
 
+# Installing Docker Compose
+sudo apt install docker-compose -y
+
+# Installing AWS CLI
+#!/bin/bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo apt install unzip -y
+unzip awscliv2.zip
+sudo ./aws/install
+
 # Installing Trivy
 # !/bin/bash
 sudo apt-get install wget apt-transport-https gnupg lsb-release
@@ -42,9 +52,9 @@ echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main |
 sudo apt-get update -y
 sudo apt-get install trivy -y
 
-# Run Docker Container of Sonarqube server
+# Run Docker Container of Sonarqube
 #!/bin/bash
-# docker run -d  --name sonar -p 9000:9000 sonarqube:lts-community
+docker run -d  --name sonar -p 9000:9000 sonarqube:lts-community
 
 # Check every thing got installed 
 jenkins --version

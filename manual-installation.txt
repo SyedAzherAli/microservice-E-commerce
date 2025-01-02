@@ -1,0 +1,80 @@
+# Install AWS LoadBalancer Controller
+# Download iam policy for aws loadBalancer
+curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.7.2/docs/install/iam_policy.json
+
+# Create iam policy 
+aws iam create-policy \
+    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-document file://iam_policy.json
+
+# Create OIDC Provider ( Replace with yoru cluster name )
+eksctl utils associate-iam-oidc-provider --region=ap-south-1 --cluster=dev-eks-cluster --approve
+
+# Create a Service Account by using below command and replace your account ID with your one
+eksctl create iamserviceaccount \
+  --cluster=dev-eks-cluster \
+  --namespace=kube-system \
+  --name=aws-load-balancer-controller \
+  --role-name AmazonEKSLoadBalancerControllerRole \
+  --attach-policy-arn=arn:aws:iam::654654355718:policy/AWSLoadBalancerControllerIAMPolicy \
+  --approve \
+  --region=ap-south-1
+
+# Install AWS LoadBalancer Controller
+helm repo add eks https://aws.github.io/eks-charts
+helm repo update eks
+
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+-n kube-system \
+--set clusterName=dev-eks--cluster \
+--set serviceAccount.create=false \
+--set serviceAccount.name=aws-load-balancer-controller
+
+# Install ArgoCD 
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# set service type LoadBalancer
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+
+# Get argoCD LoadBalancer URL
+kubectl get svc argocd-server -n argocd | awk '{print $4}'
+
+# argocd password
+kubectl get secret argocd-initial-admin-secret -n argocd -o yaml | grep "password:" | awk '{print $2}' | base64 -d
+
+# Login to aws ecr repo 
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 654654355718.dkr.ecr.ap-south-1.amazonaws.com
+
+# ECR secret for image pull 
+kubectl create secret generic ecr-registry-key \
+--from-file=.dockerconfigjson=~/.docker/config.json \
+--type=kubernetes.io/dockerconfigjson || echo "Secret already exists, skipping creation."
+
+# Setup AWS Loadbalancer Controller 
+
+# k8s ecr secret
+aws configure 
+
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 654654355718.dkr.ecr.ap-south-1.amazonaws.com
+
+kubectl create secret generic ecr-registry-key \
+--from-file=.dockerconfigjson=~/.docker/config.json \
+--type=kubernetes.io/dockerconfigjson || echo "Secret already exists, skipping creation."
+
+
+apiVersion: v1
+kind: Secret 
+metadata:
+   name: ecr-registry-key 
+data:
+   .dockerconfigjson: <enter base64 encoded config file>
+type: kubernetes.io/dockerconfigjson
+
+# Create Jenkins Credentials kind "secret text"
+Secret: Enter the AWS Access Key ID and AWs Secret Access key in the format 
+AWS_ACCESS_KEY_ID:AWS_SECRET_ACCESS_KEY
+ID: aws-ecr-credentials
+
+
+
