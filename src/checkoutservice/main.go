@@ -62,8 +62,6 @@ func init() {
 }
 
 type checkoutService struct {
-	pb.UnimplementedCheckoutServiceServer
-
 	productCatalogSvcAddr string
 	productCatalogSvcConn *grpc.ClientConn
 

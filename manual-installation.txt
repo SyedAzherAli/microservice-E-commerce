@@ -46,10 +46,14 @@ kubectl get secret argocd-initial-admin-secret -n argocd -o yaml | grep "passwor
 # Login to aws ecr repo 
 aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 654654355718.dkr.ecr.ap-south-1.amazonaws.com
 
+# Create namespace for out application 
+kubectl create namespace ecommerce
+
 # ECR secret for image pull 
 kubectl create secret generic ecr-registry-key \
---from-file=.dockerconfigjson=~/.docker/config.json \
---type=kubernetes.io/dockerconfigjson || echo "Secret already exists, skipping creation."
+--from-file=.dockerconfigjson=/home/ubuntu/.docker/config.json \
+--type=kubernetes.io/dockerconfigjson \
+--namespace=ecommerce || echo "Secret already exists, skipping creation."
 
 # Setup AWS Loadbalancer Controller 
 

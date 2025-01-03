@@ -124,13 +124,13 @@ resource "aws_eks_addon" "eks-addons" {
   addon_version = each.value.version
 
   depends_on = [
-    aws_eks_node_group.ondemand-node,
-    aws_eks_node_group.spot-node
+    aws_eks_node_group.eks_nodegroup_ondemand,
+    aws_eks_node_group.eks_nodegroup_spot
   ]
 }
  
 # Creating nodegroup ON_DEMAND
-resource "aws_eks_node_group" "eks_nodegroup" { 
+resource "aws_eks_node_group" "eks_nodegroup_ondemand" { 
   cluster_name    = aws_eks_cluster.my_first_cluster.name
   node_group_name = "${var.cluster_name}-on-demand-nodes"
   node_role_arn   = aws_iam_role.eks_node_role.arn

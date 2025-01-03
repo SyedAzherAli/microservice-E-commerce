@@ -12,15 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM python:3.12.8-alpine@sha256:f92e36f6569658ba9501e2e1e3ca780d61faea8e84edd990a0ed70d0ca8add4a AS base
+FROM python:3.10.8-slim@sha256:abf96998af340975c26177b900c10cfb40716c985325303c063736f0f5cf3171 as base
 
-FROM base AS builder
+FROM base as builder
 
-RUN apk update \
-    && apk add --no-cache \
-        wget \
-        g++ \
-    && rm -rf /var/cache/apk/*
+RUN apt-get -qq update \
+    && apt-get install -y --no-install-recommends \
+        wget g++ \
+    && rm -rf /var/lib/apt/lists/*
 
 # get packages
 COPY requirements.txt .
@@ -34,7 +33,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /recommendationservice
 
 # Grab packages from builder
-COPY --from=builder /usr/local/lib/python3.12/ /usr/local/lib/python3.12/
+COPY --from=builder /usr/local/lib/python3.10/ /usr/local/lib/python3.10/
 
 # Add the application
 COPY . .

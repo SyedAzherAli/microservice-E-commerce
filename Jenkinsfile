@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-        NVD_API_KEY = credentials('NVD_API_KEY') 
         SONARQUBE_HOME = tool 'sonar-scanner'
         AWS_REGION = 'ap-south-1'
         AWS_ACCOUNT_ID = '654654355718'

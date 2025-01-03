@@ -12,13 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM python:3.12.7-alpine@sha256:b83d5ec7274bee17d2f4bd0bfbb082f156241e4513f0a37c70500e1763b1d90d AS base
+FROM python:3.10.8-slim@sha256:abf96998af340975c26177b900c10cfb40716c985325303c063736f0f5cf3171 as base
 
-FROM base AS builder
+FROM base as builder
 
-RUN apk update \
-    && apk add --no-cache wget g++ \
-    && rm -rf /var/cache/apk/*
+RUN apt-get -qq update \
+    && apt-get install -y --no-install-recommends \
+        wget g++ \
+    && rm -rf /var/lib/apt/lists/*
 
 # get packages
 COPY requirements.txt .
@@ -33,7 +34,7 @@ ENV ENABLE_PROFILER=1
 WORKDIR /email_server
 
 # Grab packages from builder
-COPY --from=builder /usr/local/lib/python3.12/ /usr/local/lib/python3.12/
+COPY --from=builder /usr/local/lib/python3.10/ /usr/local/lib/python3.10/
 
 # Add the application
 COPY . .
