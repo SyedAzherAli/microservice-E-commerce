@@ -13,5 +13,8 @@ resource "aws_instance" "EC2Instance" {
     volume_size = var.volume_size
   }
   
+  tags = {
+    Name = var.ec2name
+  }
 }
 

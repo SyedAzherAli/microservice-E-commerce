@@ -25,3 +25,6 @@ variable "user_data" {
 variable "volume_size" {
   default = 8
 }
+variable "ec2name" {
+  description = "Name of the EC2 instance"            // *
+}

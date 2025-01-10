@@ -8,7 +8,7 @@ resource "aws_vpc" "custom_vpc"{
     enable_dns_hostnames = var.dns_hostnames
     
     tags = {
-      "name" = "customVPC"
+      Name = "customVPC"
     }
 }
 //creating subnet 1 
@@ -68,6 +68,7 @@ resource "aws_internet_gateway" "custom_IGW" {
 
   tags = {
     Name = "customIG"
+    "kubernetes.io/cluster/dev-eks-cluster" = "shared" 
   }
 
 }
